@@ -1,0 +1,102 @@
+---
+import Icon from '../components/Icon.astro';
+import Layout from '../layouts/Layout.astro';
+
+const duo = await Astro.glob('../icons/duo/*.svg');
+const duo15 = await Astro.glob('../icons/duo-15/*.svg');
+const mono = await Astro.glob('../icons/mono/*.svg');
+const fill = await Astro.glob('../icons/fill/*.svg');
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <h1>Universicons</h1>
+
+    <h2>Duotone</h2>
+    <div class="icon-list">
+      {duo.map((icon) => <a href={icon.default} class="icon"><Icon icon={icon} /></a>)}
+    </div>
+
+    <h2>Duotone 1.5px</h2>
+    <div class="icon-list">
+      {duo15.map((icon) => <a href={icon.default} class="icon"><Icon icon={icon} /></a>)}
+    </div>
+
+    <h2>Mono</h2>
+    <div class="icon-list">
+      {mono.map((icon) => <a href={icon.default} class="icon"><Icon icon={icon} /></a>)}
+    </div>
+
+    <h2>Filled</h2>
+    <div class="icon-list">
+      {fill.map((icon) => <a href={icon.default} class="icon"><Icon icon={icon} /></a>)}
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  :root {
+    --icon: #525252;
+    --icon-hover: #7540DD;
+  }
+
+  main {
+    max-width: calc(49px*20);/* Calculate size based on icon+wrapper size */
+    margin: 2rem auto;
+    padding: 64px;
+    padding: clamp(1rem, 6vw, 4rem);
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.04), 0px 2px 2px rgba(0,0,0,0.04), 0px 4px 4px rgba(0,0,0,0.04), 0px 8px 8px rgba(0,0,0,0.04), 0px 16px 16px rgba(0,0,0,0.04);
+  }
+
+  h2 {
+    margin: 2em 0 0.5em;
+  }
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  .icon-list {
+    display: flex;
+    flex-flow: row wrap;
+    color: var(--icon);
+  }
+
+  .icon-list a {
+    color: currentColor;
+  }
+
+  .icon {
+    display: block;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    margin: 0px -1px -1px 0px;
+  }
+
+  .icon svg {
+    display: block;
+  }
+
+  .icon path {
+    fill: currentColor;
+  }
+
+  /*.icon:hover {
+    padding: 0.5rem;
+  }
+  .icon:hover svg {
+    width: 32px;
+    height: 32px;
+  }*/
+
+  .icon:hover path {
+    color: var(--icon-hover);
+  }
+
+  .inverted .icon {
+    background-color: #222;
+    color: #fff;
+    border-color: #444;
+  }
+</style>
